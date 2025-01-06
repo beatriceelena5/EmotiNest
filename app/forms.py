@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .models import db, DailyEntry
+from flask_login import login_required
 
 forms = Blueprint('forms', __name__)
 
 @forms.route('/forms', methods=['GET', 'POST'])
+@login_required
 def daily_form():
     if request.method == 'POST':
         emotional_state = request.form.get('emotional_state')
