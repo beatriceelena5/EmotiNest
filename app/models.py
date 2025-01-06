@@ -20,3 +20,4 @@ class DailyEntry(db.Model):
     sleep_quality = db.Column(db.Integer, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date = db.Column(db.DateTime, default=db.func.current_timestamp())
+

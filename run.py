@@ -10,5 +10,5 @@ with app.app_context():
     print("Database updated!")
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)

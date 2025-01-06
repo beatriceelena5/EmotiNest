@@ -11,7 +11,7 @@ def index():
     goals = [goal.description for goal in user_goals]
 
     # Statistici
-    total_entries = db.session.query(func.count(DailyEntry.id)).scalar()
+    total_entries = db.session.query(func.count(DailyEntry.id)).scalar() or 0
     avg_stress = db.session.query(func.avg(DailyEntry.stress_level)).scalar() or 0
     avg_sleep = db.session.query(func.avg(DailyEntry.sleep_quality)).scalar() or 0
 
