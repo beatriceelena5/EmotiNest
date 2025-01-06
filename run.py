@@ -2,7 +2,7 @@ from app import create_app
 
 app = create_app()
 
-from app.models import db, User  # Importă modelul User
+from app.models import db, User, Goal  # Importă modelul User
 
 # Creează baza de date
 with app.app_context():
@@ -10,5 +10,5 @@ with app.app_context():
     print("Database initialized!")
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     app.run(debug=True)
