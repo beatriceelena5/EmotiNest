@@ -2,56 +2,87 @@
 <html>
 <head>
     <title>Statistics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Statistics</h1>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Statistics</h1>
 
-    <h3>Average Stress Level Over the Last 7 Days</h3>
-    <canvas id="stressChart"></canvas>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Average Stress Level Over the Last 7 Days</h3>
+                <canvas id="stressChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h3>Average Sleep Quality Over the Last 7 Days</h3>
+                <canvas id="sleepChart"></canvas>
+            </div>
+        </div>
 
-    <h3>Average Sleep Quality Over the Last 7 Days</h3>
-    <canvas id="sleepChart"></canvas>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Average Energy Level Over the Last 7 Days</h3>
+                <canvas id="energyChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h3>Average Productivity Level Over the Last 7 Days</h3>
+                <canvas id="productivityChart"></canvas>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Water Intake Over the Last 7 Days</h3>
+                <canvas id="waterChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h3>Days with Physical Exercise</h3>
+                <canvas id="exerciseChart"></canvas>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h3>Days with Meditation</h3>
+                <canvas id="meditationChart"></canvas>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Injectăm variabilele generate de Flask
         const labels = JSON.parse('{{ labels | tojson | safe }}');
         const stressData = JSON.parse('{{ stress_data | tojson | safe }}');
         const sleepData = JSON.parse('{{ sleep_data | tojson | safe }}');
+        const energyData = JSON.parse('{{ energy_data | tojson | safe }}');
+        const productivityData = JSON.parse('{{ productivity_data | tojson | safe }}');
+        const waterData = JSON.parse('{{ water_data | tojson | safe }}');
+        const physicalExerciseData = JSON.parse('{{ physical_exercise_data | tojson | safe }}');
+        const meditationData = JSON.parse('{{ meditation_data | tojson | safe }}');
 
-        // Configurăm graficul pentru nivelul de stres
-        const stressConfig = {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Stress Level',
-                    data: stressData,
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderWidth: 2,
-                }]
-            }
+        const createChart = (id, label, data, color) => {
+            new Chart(document.getElementById(id), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: label,
+                        data: data,
+                        borderColor: color,
+                        backgroundColor: color.replace('1)', '0.2)'),
+                        borderWidth: 2,
+                    }]
+                }
+            });
         };
 
-        // Configurăm graficul pentru calitatea somnului
-        const sleepConfig = {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Sleep Quality',
-                    data: sleepData,
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderWidth: 2,
-                }]
-            }
-        };
-
-        // Inițializăm graficele
-        new Chart(document.getElementById('stressChart'), stressConfig);
-        new Chart(document.getElementById('sleepChart'), sleepConfig);
+        createChart('stressChart', 'Stress Level', stressData, 'rgba(255, 99, 132, 1)');
+        createChart('sleepChart', 'Sleep Quality', sleepData, 'rgba(54, 162, 235, 1)');
+        createChart('energyChart', 'Energy Level', energyData, 'rgba(75, 192, 192, 1)');
+        createChart('productivityChart', 'Productivity Level', productivityData, 'rgba(153, 102, 255, 1)');
+        createChart('waterChart', 'Water Intake (liters)', waterData, 'rgba(255, 206, 86, 1)');
+        createChart('exerciseChart', 'Physical Exercise (Days)', physicalExerciseData, 'rgba(255, 159, 64, 1)');
+        createChart('meditationChart', 'Meditation (Days)', meditationData, 'rgba(201, 203, 207, 1)');
     </script>
 </body>
 </html>

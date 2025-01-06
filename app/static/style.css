@@ -280,3 +280,17 @@ footer {
         width: 100%; /* Pe ecrane mici, fiecare casetă va ocupa întreaga lățime */
     }
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+
+
