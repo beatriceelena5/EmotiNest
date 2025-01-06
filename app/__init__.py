@@ -2,7 +2,7 @@ from flask import Flask
 from .models import db
 
 def create_app():
-    app = Flask(_name_)
+    app = Flask(__name__)
     app.config['SECRET_KEY'] = 'your_secret_key_here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///emotinest.db'
 
@@ -15,5 +15,8 @@ def create_app():
 
     from .home import home as home_blueprint
     app.register_blueprint(home_blueprint)
+
+    from .forms import forms as forms_blueprint
+    app.register_blueprint(forms_blueprint)
 
     return app

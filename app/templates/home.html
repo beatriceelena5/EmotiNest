@@ -12,10 +12,15 @@
 <html>
 <head>
     <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <h1>Welcome to EmotiNest, {{ user_name }}!</h1>
     <p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
+
+    <p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
+    <p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
+
 
     <h2>Your Goals</h2>
     <ul>
@@ -29,5 +34,11 @@
         <input type="text" name="goal" placeholder="Enter your goal" required>
         <button type="submit">Add Goal</button>
     </form>
+
+    <h3>Track Your Day</h3>
+    <a href="/forms">
+        <button>Go to Daily Form</button>
+    </a>
+
 </body>
 </html>
