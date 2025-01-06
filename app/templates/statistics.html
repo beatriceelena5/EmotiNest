@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Statistics</h1>
+
+    <h3>Average Stress Level Over the Last 7 Days</h3>
+    <canvas id="stressChart"></canvas>
+
+    <h3>Average Sleep Quality Over the Last 7 Days</h3>
+    <canvas id="sleepChart"></canvas>
+
+    <script>
+        // Injectăm variabilele generate de Flask
+        const labels = JSON.parse('{{ labels | tojson | safe }}');
+        const stressData = JSON.parse('{{ stress_data | tojson | safe }}');
+        const sleepData = JSON.parse('{{ sleep_data | tojson | safe }}');
+
+        // Configurăm graficul pentru nivelul de stres
+        const stressConfig = {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Stress Level',
+                    data: stressData,
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 2,
+                }]
+            }
+        };
+
+        // Configurăm graficul pentru calitatea somnului
+        const sleepConfig = {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Sleep Quality',
+                    data: sleepData,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 2,
+                }]
+            }
+        };
+
+        // Inițializăm graficele
+        new Chart(document.getElementById('stressChart'), stressConfig);
+        new Chart(document.getElementById('sleepChart'), sleepConfig);
+    </script>
+</body>
+</html>
