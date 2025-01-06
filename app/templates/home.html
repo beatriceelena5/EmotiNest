@@ -1,44 +1,53 @@
 {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul>
-      {% for category, message in messages %}
-        <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+{% if messages %}
+<ul>
+	{% for category, message in messages %}
+	<li class="{{ category }}">{{ message }}</li>
+	{% endfor %}
+</ul>
+{% endif %}
 {% endwith %}
 
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h1>Welcome to EmotiNest, {{ user_name }}!</h1>
-    <p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
+	<h1>Welcome to EmotiNest, {{ user_name }}!</h1>
+	<p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
 
-    <p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
-    <p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
+	<p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
+	<p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
 
 
-    <h2>Your Goals</h2>
-    <ul>
-        {% for goal in goals %}
-        <li>{{ goal }}</li>
-        {% endfor %}
-    </ul>
+	<h2>Your Goals</h2>
+	<ul>
+		{% for goal in goals %}
+		<li>{{ goal }}</li>
+		{% endfor %}
+	</ul>
 
-    <h3>Add a New Goal</h3>
-    <form method="POST" action="/add_goal">
-        <input type="text" name="goal" placeholder="Enter your goal" required>
-        <button type="submit">Add Goal</button>
-    </form>
+	<h3>Add a New Goal</h3>
+	<form method="POST" action="/add_goal">
+		<input type="text" name="goal" placeholder="Enter your goal" required>
+		<button type="submit">Add Goal</button>
+	</form>
 
-    <h3>Track Your Day</h3>
-    <a href="/forms">
-        <button>Go to Daily Form</button>
-    </a>
+	<h3>Track Your Day</h3>
+	<a href="/forms">
+		<button>Go to Daily Form</button>
+	</a>
+
+	<h3>View Your Statistics</h3>
+	<a href="/statistics">
+		<button>Go to Statistics</button>
+	</a>
+
 
 </body>
+
 </html>
