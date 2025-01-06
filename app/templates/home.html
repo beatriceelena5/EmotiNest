@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - EmotiNest</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-
 <body>
     <!-- Barra de navigare -->
     <header>
@@ -67,7 +65,19 @@
             </div>
         </section>
 
+        <!-- Do Tests Section -->
+        <section class="tests-container">
+            <h2>Do Tests</h2>
+            <p>Discover more about yourself through these tests:</p>
+            <ul>
+                <li><a href="/do_tests/adhd">ADHD Test</a></li>
+                <li><a href="/do_tests/depression">Depression Test</a></li>
+                <li><a href="/do_tests/anxiety">Anxiety Test</a></li>
+                <li><a href="/do_tests/ptsd">PTSD Test</a></li>
+                <li><a href="/do_tests/job_burnout">Job Burnout Test</a></li>
+            </ul>
+        </section>
+
     </main>
 </body>
-
 </html>

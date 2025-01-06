@@ -8,23 +8,23 @@ login_manager = LoginManager()
 @login_manager.user_loader
 def load_user(user_id):
 	from .models import User
-	return User.query.get(int(user_id))  # Găsește utilizatorul după ID
+	return User.query.get(int(user_id))  # Load user by ID
 
 def create_app():
 	app = Flask(__name__)
 	app.config['SECRET_KEY'] = 'your_secret_key_here'
 	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Emotinest.db'
 
-	# Inițializează extensiile
+	# Initialize extensions
 	db.init_app(app)
 	login_manager.init_app(app)
 
-	# Configurează ruta implicită pentru login
+	# Configure default login route
 	login_manager.login_view = 'auth.login'
 	login_manager.login_message = "Please log in to access this page."
 	login_manager.login_message_category = "info"
 
-	# Înregistrează blueprint-urile
+	# Register blueprints
 	from .auth import auth as auth_blueprint
 	app.register_blueprint(auth_blueprint, url_prefix='/auth')
 
@@ -36,5 +36,8 @@ def create_app():
 
 	from .statistics import statistics as statistics_blueprint
 	app.register_blueprint(statistics_blueprint)
+
+	from .do_tests import do_tests as do_tests_blueprint
+	app.register_blueprint(do_tests_blueprint, url_prefix='/do_tests')
 
 	return app
