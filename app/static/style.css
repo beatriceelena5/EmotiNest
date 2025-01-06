@@ -72,3 +72,17 @@ a:hover {
     text-decoration: underline;
     color: #0056b3; /* Albastru mai închis pentru hover */
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+
+
