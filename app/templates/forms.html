@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Daily Form</title>
+</head>
+<body>
+    <h1>Daily Form</h1>
+    <form method="POST">
+        <label for="emotional_state">Emotional State:</label>
+        <input type="text" name="emotional_state" id="emotional_state" placeholder="Happy, Sad, etc." required><br>
+
+        <label for="stress_level">Stress Level (1-10):</label>
+        <input type="number" name="stress_level" id="stress_level" min="1" max="10" required><br>
+
+        <label for="sleep_quality">Sleep Quality (1-10):</label>
+        <input type="number" name="sleep_quality" id="sleep_quality" min="1" max="10" required><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+</body>
+</html>
