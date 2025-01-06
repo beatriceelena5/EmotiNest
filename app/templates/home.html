@@ -1,77 +1,73 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Home - EmotiNest</title>
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - EmotiNest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+    <!-- Barra de navigare -->
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/forms">Track Your Day</a></li>
+                <li><a href="/statistics">View Your Statistics</a></li>
+                <li><a href="/do_tests">Do Tests</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
 
-	{% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <div>
-        {% for category, message in messages %}
-        <div class="flash-message {{ category }}">
-            {{ message }}
+    <main>
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-    {% endif %}
-    {% endwith %}
+        {% endif %}
+        {% endwith %}
 
-	<header>
-		<h1>Welcome to EmotiNest, {{ user_name }}!</h1>
-	</header>
-	
-	<main>
-		<section>
-			<p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
-			<p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
-			<p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
-		</section>
+        <header>
+            <h1>Welcome to EmotiNest, {{ user_name }}!</h1>
+        </header>
 
-		<section>
-			<h2>Your Goals</h2>
-			<ul>
-				{% for goal in goals %}
-				<li>{{ goal }}</li>
-				{% endfor %}
-			</ul>
-		</section>
+        <!-- Informații generale -->
+        <div class="card">
+            <h2>Your Stats</h2>
+            <p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
+            <p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
+            <p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
+        </div>
 
-		<section>
-			<h3>Add a New Goal</h3>
-			<form method="POST" action="/add_goal">
-				<input type="text" name="goal" placeholder="Enter your goal" required>
-				<button type="submit">Add Goal</button>
-			</form>
-		</section>
+        <!-- Goals (Două casete, aliniate una lângă cealaltă) -->
+        <section class="goals-container">
+            <div class="goals-card">
+                <h2>Your Goals</h2>
+                <ul>
+                    {% for goal in goals %}
+                    <li>{{ goal }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-		<section>
-			<h3>Track Your Day</h3>
-			<a href="/forms">
-				<button>Go to Daily Form</button>
-			</a>
-		</section>
+            <div class="add-goal-card">
+                <h3>Add a New Goal</h3>
+                <form method="POST" action="/add_goal">
+                    <input type="text" name="goal" placeholder="Enter your goal" required>
+                    <button type="submit">Add Goal</button>
+                </form>
+            </div>
+        </section>
 
-		<section>
-			<h3>View Your Statistics</h3>
-			<a href="/statistics">
-				<button>Go to Statistics</button>
-			</a>
-		</section>
-	</main>
-
-	<footer>
-		<section>
-			<h3>Account Actions</h3>
-			<a href="/auth/logout">
-				<button>Logout</button>
-			</a>
-		</section>
-	</footer>
+    </main>
 </body>
 
 </html>
