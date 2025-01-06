@@ -292,5 +292,35 @@ h1, h3 {
     color: #333;
 }
 
+.tests-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.tests-container h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.tests-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.tests-container li {
+    margin: 5px 0;
+}
+
+.tests-container a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.tests-container a:hover {
+    text-decoration: underline;
+}
 
 
