@@ -1,6 +1,5 @@
 instance/Emotinest.dbinstance/*.db
 instance/*.db
-# Python bytecode files
 __pycache__/
 *.pyc
 *.pyo

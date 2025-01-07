@@ -25,11 +25,11 @@ class DailyEntry(db.Model):
     emotional_state = db.Column(db.String(50), nullable=False)
     stress_level = db.Column(db.Integer, nullable=False)
     sleep_quality = db.Column(db.Integer, nullable=False)
-    energy_level = db.Column(db.Integer, nullable=False)  # Nivel de energie
+    energy_level = db.Column(db.Integer, nullable=False)
     happiness_level = db.Column(db.Float, nullable=False)
-    productivity_level = db.Column(db.Integer, nullable=False)  # Nivel de productivitate
-    water_intake = db.Column(db.Float, nullable=False)  # Consum de apă în litri
-    physical_exercise = db.Column(db.Boolean, nullable=False)  # Exerciții fizice (Da/Nu)
-    meditation = db.Column(db.Boolean, nullable=False)  # Meditație (Da/Nu)
+    productivity_level = db.Column(db.Integer, nullable=False)
+    water_intake = db.Column(db.Float, nullable=False)
+    physical_exercise = db.Column(db.Boolean, nullable=False)
+    meditation = db.Column(db.Boolean, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     date = db.Column(db.DateTime, default=db.func.current_timestamp())

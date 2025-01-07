@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Bara de navigare -->
     <header>
         <nav>
             <div class="logo-container">
@@ -25,7 +24,6 @@
         </nav>
     </header>
 
-    <!-- Flash messages -->
     <div class="flash-container">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -40,7 +38,6 @@
         {% endwith %}
     </div>
 
-    <!-- Conținutul principal -->
     <main class="container">
         <div class="form-container">
             <form method="POST" class="daily-form">
@@ -54,7 +51,6 @@
                 <input type="number" name="water_intake" placeholder="Water Intake (Liters)" step="0.1" required>
 				<input type="number" name="happiness_level" placeholder="Happiness Level (1-10)" min="1" max="10" required>
 
-                <!-- Exerciții fizice -->
                 <label class="form-label">Did you exercise today?</label>
                 <div class="form-check-group">
                     <label class="form-check-label">
@@ -67,7 +63,6 @@
                     </label>
                 </div>
 
-                <!-- Meditație -->
                 <label class="form-label">Did you meditate today?</label>
                 <div class="form-check-group">
                     <label class="form-check-label">

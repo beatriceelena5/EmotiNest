@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- Bara de navigare -->
     <header>
         <nav>
             <div class="logo-container">
@@ -56,7 +55,6 @@
         </form>
     </main>
 
-    <!-- Fereastra pop-up -->
     <div id="popup" class="popup hidden">
         <div class="popup-content">
             <span class="popup-close" onclick="closePopup()">&times;</span>
@@ -79,15 +77,12 @@
             const formData = new FormData(event.target);
             let score = 0;
 
-            // Calculate the score
             formData.forEach((value) => {
                 score += parseInt(value, 10);
             });
 
-            // Set feedback messages
             const feedback = feedbackMessages[testType](score);
 
-            // Display the pop-up
             document.getElementById("popup-title").textContent = `${testType} Test Result`;
             document.getElementById("popup-score").textContent = `Your score: ${score}`;
             document.getElementById("popup-feedback").textContent = feedback;
