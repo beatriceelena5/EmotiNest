@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <!-- Barra de navigare -->
+    <!-- Bara de navigare cu logo -->
     <header>
         <nav>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo" class="logo">
+            </div>
             <ul class="nav-links">
                 <li><a href="/forms">Track Your Day</a></li>
                 <li><a href="/statistics">View Your Statistics</a></li>
@@ -19,7 +22,7 @@
         </nav>
     </header>
 
-    <main>
+    <main class="container">
         <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -32,30 +35,42 @@
         </div>
         {% endif %}
         {% endwith %}
-
+    
         <header>
             <h1>Welcome to EmotiNest, {{ user_name }}!</h1>
         </header>
-
+    
         <!-- Informații generale -->
         <div class="card">
             <h2>Your Stats</h2>
             <p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
-            <p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
-            <p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
-        </div>
-
-        <!-- Goals (Două casete, aliniate una lângă cealaltă) -->
+            <p>Average Stress Level: <strong>{{ avg_stress }}</strong></p>
+            <p>Average Sleep Quality: <strong>{{ avg_sleep }}</strong></p>
+            <p>Average Energy Level: <strong>{{ avg_energy }}</strong></p>
+            <p>Average Productivity Level: <strong>{{ avg_productivity }}</strong></p>
+            <p>Average Water Intake: <strong>{{ avg_water_intake }} L</strong></p>
+            <p>Total Days with Physical Exercise: <strong>{{ total_exercise_days }}</strong></p>
+            <p>Total Days with Meditation: <strong>{{ total_meditation_days }}</strong></p>
+        </div>      
+        
+    
+        <!-- Goals Container -->
         <section class="goals-container">
             <div class="goals-card">
                 <h2>Your Goals</h2>
-                <ul>
+                <ul class="goals-list">
                     {% for goal in goals %}
-                    <li>{{ goal }}</li>
+                    <li class="goal-item">
+                        <span class="goal-text">{{ goal.description }}</span>
+                        <form method="POST" action="{{ url_for('home.delete_goal', goal_id=goal.id) }}" class="goal-form">
+                            <button type="submit" class="btn btn-success">Done</button>
+                        </form>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
-
+            
+    
             <div class="add-goal-card">
                 <h3>Add a New Goal</h3>
                 <form method="POST" action="/add_goal">
@@ -64,20 +79,7 @@
                 </form>
             </div>
         </section>
-
-        <!-- Do Tests Section -->
-        <section class="tests-container">
-            <h2>Do Tests</h2>
-            <p>Discover more about yourself through these tests:</p>
-            <ul>
-                <li><a href="/do_tests/adhd">ADHD Test</a></li>
-                <li><a href="/do_tests/depression">Depression Test</a></li>
-                <li><a href="/do_tests/anxiety">Anxiety Test</a></li>
-                <li><a href="/do_tests/ptsd">PTSD Test</a></li>
-                <li><a href="/do_tests/job_burnout">Job Burnout Test</a></li>
-            </ul>
-        </section>
-
     </main>
+    
 </body>
 </html>
