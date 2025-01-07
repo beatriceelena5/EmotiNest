@@ -10,23 +10,31 @@ home = Blueprint('home', __name__)
 @login_required
 def index():
     user_goals = Goal.query.filter_by(user_id=current_user.id).all()
-    goals = [goal.description for goal in user_goals]
 
+    # Calculăm statisticile pentru utilizator
     total_entries = db.session.query(func.count(DailyEntry.id)).filter_by(user_id=current_user.id).scalar() or 0
     avg_stress = db.session.query(func.avg(DailyEntry.stress_level)).filter_by(user_id=current_user.id).scalar() or 0
     avg_sleep = db.session.query(func.avg(DailyEntry.sleep_quality)).filter_by(user_id=current_user.id).scalar() or 0
     avg_energy = db.session.query(func.avg(DailyEntry.energy_level)).filter_by(user_id=current_user.id).scalar() or 0
     avg_happiness = db.session.query(func.avg(DailyEntry.happiness_level)).filter_by(user_id=current_user.id).scalar() or 0
+    avg_productivity = db.session.query(func.avg(DailyEntry.productivity_level)).filter_by(user_id=current_user.id).scalar() or 0
+    avg_water_intake = db.session.query(func.avg(DailyEntry.water_intake)).filter_by(user_id=current_user.id).scalar() or 0
+    total_exercise_days = db.session.query(func.sum(DailyEntry.physical_exercise)).filter_by(user_id=current_user.id).scalar() or 0
+    total_meditation_days = db.session.query(func.sum(DailyEntry.meditation)).filter_by(user_id=current_user.id).scalar() or 0
 
     return render_template(
         'home.html',
         user_name=current_user.name,
         total_entries=total_entries,
-        avg_stress=avg_stress,
-        avg_sleep=avg_sleep,
-        avg_energy=avg_energy,
-        avg_happiness=avg_happiness,
-        goals=user_goals  # Transmite obiectivele în șablon
+        avg_stress=round(avg_stress, 2),
+        avg_sleep=round(avg_sleep, 2),
+        avg_energy=round(avg_energy, 2),
+        avg_happiness=round(avg_happiness, 2),
+        avg_productivity=round(avg_productivity, 2),
+        avg_water_intake=round(avg_water_intake, 2),
+        total_exercise_days=int(total_exercise_days),
+        total_meditation_days=int(total_meditation_days),
+        goals=user_goals
     )
 
 @home.route('/add_goal', methods=['POST'])
