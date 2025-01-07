@@ -9,7 +9,23 @@
 </head>
 
 <body>
+	<div class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+
     <div class="login-container">
+        <!-- Flash messages -->
+        
         <!-- Formular login -->
         <form method="POST" action="/auth/login" class="login-form">
             <h1>Login</h1>
@@ -24,7 +40,6 @@
             <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo">
         </div>
     </div>
-
 </body>
 
 </html>
