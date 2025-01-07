@@ -8,23 +8,22 @@ home = Blueprint('home', __name__)
 @home.route('/')
 @login_required
 def index():
-    # Fetch user-specific goals
     user_goals = Goal.query.filter_by(user_id=current_user.id).all()
     goals = [goal.description for goal in user_goals]
 
-    # Calculate statistics for the current user
     total_entries = db.session.query(func.count(Goal.id)).filter_by(user_id=current_user.id).scalar() or 0
     avg_stress = db.session.query(func.avg(Goal.id)).filter_by(user_id=current_user.id).scalar() or 0
     avg_sleep = db.session.query(func.avg(Goal.id)).filter_by(user_id=current_user.id).scalar() or 0
 
     return render_template(
         'home.html',
-        user_name=current_user.email,
+        user_name=current_user.name,  # Afișăm numele în loc de email
         total_entries=total_entries,
         goals=goals,
         avg_stress=avg_stress,
         avg_sleep=avg_sleep
     )
+
 
 @home.route('/add_goal', methods=['POST'])
 @login_required

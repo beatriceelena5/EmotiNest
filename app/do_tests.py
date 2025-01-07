@@ -21,7 +21,7 @@ def anxiety_test():
 
 @do_tests.route('/burnout')
 def burnout_test():
-	return render_template('do_tests/burnout_test.html')
+    return render_template('do_tests/burnout_test.html')
 
 @do_tests.route('/submit_adhd_test', methods=['POST'])
 def submit_adhd_test():
