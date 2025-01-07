@@ -1,55 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Statistics</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics - EmotiNest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Statistics</h1>
 
-        <div class="row">
-            <div class="col-md-6">
+<body>
+    <!-- Bara de navigare cu logo -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/forms">Track Your Day</a></li>
+                <li><a href="/statistics">View Your Statistics</a></li>
+                <li><a href="/do_tests">Do Tests</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Container pentru grafice -->
+    <main class="container">
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-container">
+            {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <!-- Titlul paginii -->
+        <h1 class="text-center">Statistics</h1>
+
+        <!-- Graficele -->
+        <div class="statistics-container">
+            <div class="chart-card">
                 <h3>Average Stress Level Over the Last 7 Days</h3>
                 <canvas id="stressChart"></canvas>
             </div>
-            <div class="col-md-6">
+            <div class="chart-card">
                 <h3>Average Sleep Quality Over the Last 7 Days</h3>
                 <canvas id="sleepChart"></canvas>
             </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="chart-card">
                 <h3>Average Energy Level Over the Last 7 Days</h3>
                 <canvas id="energyChart"></canvas>
             </div>
-            <div class="col-md-6">
+            <div class="chart-card">
                 <h3>Average Productivity Level Over the Last 7 Days</h3>
                 <canvas id="productivityChart"></canvas>
             </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="chart-card">
                 <h3>Water Intake Over the Last 7 Days</h3>
                 <canvas id="waterChart"></canvas>
             </div>
-            <div class="col-md-6">
+            <div class="chart-card">
                 <h3>Days with Physical Exercise</h3>
                 <canvas id="exerciseChart"></canvas>
             </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-6">
+            <div class="chart-card">
                 <h3>Days with Meditation</h3>
                 <canvas id="meditationChart"></canvas>
             </div>
         </div>
-    </div>
+    </main>
 
+    <!-- Script pentru grafice -->
     <script>
         const labels = JSON.parse('{{ labels | tojson | safe }}');
         const stressData = JSON.parse('{{ stress_data | tojson | safe }}');
@@ -85,4 +113,5 @@
         createChart('meditationChart', 'Meditation (Days)', meditationData, 'rgba(201, 203, 207, 1)');
     </script>
 </body>
+
 </html>
