@@ -3,7 +3,7 @@ body {
     font-family: 'Roboto', sans-serif; /* Font modern */
     margin: 0;
     padding: 0;
-    background-color: #f1f5f8; /* Fundal deschis, calmant */
+    background-color: #dbe7e5; /* Fundal deschis, calmant */
     color: #333;
     animation: fadeIn 1s ease-out;
 }
@@ -168,6 +168,7 @@ button:hover {
 /* Formulare și Input-uri */
 form {
     margin-top: 20px;
+    text-align: center; /* Center login form */
 }
 
 input {
@@ -213,6 +214,7 @@ footer {
         transform: translateY(0);
     }
 }
+
 /* Container pentru cele două casete */
 .goals-container {
     display: flex;
@@ -283,7 +285,7 @@ footer {
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #dbe7e5;
     margin: 0;
     padding: 0;
 }
@@ -295,7 +297,7 @@ h1, h3 {
 .tests-container {
     margin-top: 30px;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: #dbe7e5;
     border: 1px solid #ddd;
     border-radius: 8px;
 }
@@ -322,5 +324,83 @@ h1, h3 {
 .tests-container a:hover {
     text-decoration: underline;
 }
+/* Stil de bază pentru întregul body */
 
+/* Container principal */
+.login-container {
+    display: flex; /* Aliniere pe două coloane */
+    align-items: center; /* Centrează vertical */
+    height: 100vh; /* Înălțimea paginii */
+    padding: 0 50px; /* Spațiere stânga-dreapta */
+}
 
+/* Formularele și input-urile */
+.login-form {
+    flex: 1; /* Alocă spațiu egal cu logo-ul */
+    background-color: #b6d4fb;
+    padding: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Dimensiune maximă fixă pentru formular */
+}
+
+/* Mesajele flash (alert) */
+.flash-messages {
+    margin: 10px 0;
+}
+.login-form h1 {
+    color: #2e5475;
+    margin-bottom: 20px;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddc3db;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.login-form button {
+    width: 100%;
+    background-color: #2e5475;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #2e5475;
+}
+
+.login-form p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login-form p a {
+    color: #2e5475;
+}
+
+.login-form p a:hover {
+    text-decoration: underline;
+}
+
+.logo {
+    flex: 1; /* Alocă mai mult spațiu imaginii în layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Stilizarea logo-ului */
+.logo img {
+    max-width: 500px; /* Dimensiune maximă mare */
+    width: 100%; /* Se va adapta la dimensiunea containerului */
+    height: auto; /* Păstrează proporțiile imaginii */
+    object-fit: contain; /* Asigură redimensionarea corespunzătoare */
+}
