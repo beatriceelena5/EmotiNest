@@ -276,3 +276,34 @@ nav {
     height: auto; /* Păstrează proporțiile imaginii */
     object-fit: contain; /* Asigură redimensionarea corespunzătoare */
 }
+
+/* de aici */
+.flash-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    width: 300px;
+}
+
+.flash-message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.flash-message.success {
+    background-color: #4CAF50; /* Verde */
+}
+
+.flash-message.error {
+    background-color: #f44336; /* Roșu */
+}
+
+.flash-message.info {
+    background-color: #2196F3; /* Albastru */
+}
+
+
