@@ -24,9 +24,6 @@
     </div>
 
     <div class="login-container">
-        <!-- Flash messages -->
-        
-        <!-- Formular login -->
         <form method="POST" action="/auth/login" class="login-form">
             <h1>Login</h1>
             <input type="email" name="email" placeholder="Email" required>
@@ -35,7 +32,6 @@
             <p>Don't have an account? <a href="/auth/signup">Sign up here</a></p>
         </form>
 
-        <!-- Logo EmotiNest -->
         <div class="logo">
             <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo">
         </div>

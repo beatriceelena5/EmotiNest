@@ -5,7 +5,6 @@ from .models import User, db
 
 auth = Blueprint('auth', __name__)
 
-# Login route
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -22,7 +21,6 @@ def login():
 
     return render_template('login.html')
 
-# Sign up route
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
@@ -31,7 +29,6 @@ def signup():
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
-        # Validări
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email is already in use.', category='error')
@@ -42,7 +39,6 @@ def signup():
         elif len(name) < 2:
             flash('Name must be at least 2 characters long.', category='error')
         else:
-            # Creează un utilizator nou
             new_user = User(email=email, name=name, password=generate_password_hash(password, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
@@ -52,7 +48,6 @@ def signup():
     return render_template('signup.html')
 
 
-# Logout route
 @auth.route('/logout')
 @login_required
 def logout():

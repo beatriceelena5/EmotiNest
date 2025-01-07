@@ -19,7 +19,6 @@ def daily_form():
         physical_exercise = request.form.get('physical_exercise') == 'true'
         meditation = request.form.get('meditation') == 'true'
 
-        # Verifică dacă formularul a fost deja completat
         today_entry = DailyEntry.query.filter(
             DailyEntry.user_id == current_user.id,
             func.date(DailyEntry.date) == func.date(func.current_timestamp())
@@ -29,7 +28,6 @@ def daily_form():
             flash("You have already completed today's form.", category='error')
             return redirect(url_for('forms.daily_form'))
 
-        # Salvează datele
         if not all([emotional_state, stress_level, sleep_quality, energy_level, happiness_level, productivity_level, water_intake]):
             flash("All fields are required!", category='error')
         else:

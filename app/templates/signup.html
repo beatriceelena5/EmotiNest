@@ -10,7 +10,6 @@
 
 <body>
     <div class="login-container">
-        <!-- Flash messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div>
@@ -23,7 +22,6 @@
         {% endif %}
         {% endwith %}
 
-        <!-- Formularul de Sign Up -->
         <form method="POST" action="/auth/signup" class="login-form">
             <h1>Sign Up</h1>
             <input type="text" name="name" placeholder="Name" required>
@@ -34,7 +32,6 @@
             <p>Already have an account? <a href="/auth/login">Login here</a></p>
         </form>
 
-        <!-- Logo -->
         <div class="logo">
             <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo">
         </div>

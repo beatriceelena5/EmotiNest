@@ -9,7 +9,6 @@
 </head>
 
 <body>
-	<!-- Bara de navigare cu logo -->
 	<header>
 		<nav>
 			<div class="logo-container">
@@ -26,7 +25,6 @@
 	</header>	
 
 	<main class="container">
-		<!-- Flash messages -->
 		{% with messages = get_flashed_messages(with_categories=true) %}
 		{% if messages %}
 		<div>
@@ -44,7 +42,6 @@
 			<h1>Welcome to EmotiNest, {{ user_name }}!</h1>
 		</header>
 
-		<!-- Informații generale -->
 		<div class="card">
 			<h2>Your Stats</h2>
 			<p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
@@ -58,8 +55,6 @@
 			<p>Total Days with Meditation: <strong>{{ total_meditation_days }}</strong></p>
 		</div>
 		
-
-		<!-- Goals Container -->
 		<section class="goals-container">
 			<div class="goals-card">
 				<h2>Your Goals</h2>
@@ -91,5 +86,4 @@
 	</main>
 
 </body>
-
 </html>

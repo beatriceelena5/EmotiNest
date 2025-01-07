@@ -11,7 +11,6 @@ home = Blueprint('home', __name__)
 def index():
     user_goals = Goal.query.filter_by(user_id=current_user.id).all()
 
-    # Calculăm statisticile pentru utilizator
     total_entries = db.session.query(func.count(DailyEntry.id)).filter_by(user_id=current_user.id).scalar() or 0
     avg_stress = db.session.query(func.avg(DailyEntry.stress_level)).filter_by(user_id=current_user.id).scalar() or 0
     avg_sleep = db.session.query(func.avg(DailyEntry.sleep_quality)).filter_by(user_id=current_user.id).scalar() or 0
@@ -55,7 +54,7 @@ def add_goal():
 @login_required
 def delete_goal(goal_id):
     goal = Goal.query.get(goal_id)
-    if goal and goal.user_id == current_user.id:  # Verifică dacă goal-ul aparține utilizatorului curent
+    if goal and goal.user_id == current_user.id:
         db.session.delete(goal)
         db.session.commit()
         flash("Goal deleted successfully!", category='success')
@@ -67,7 +66,6 @@ def delete_goal(goal_id):
 @home.route('/logout')
 @login_required
 def logout():
-    # Log out the current user
     logout_user()
     flash("You have been logged out.", category='success')
     return redirect(url_for('auth.login'))
