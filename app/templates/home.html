@@ -22,64 +22,54 @@
         </nav>
     </header>
 
-    <main class="container">
-		<!-- Flash messages -->
-		{% with messages = get_flashed_messages(with_categories=true) %}
-		{% if messages %}
-		<div>
-			{% for category, message in messages %}
-			<div class="flash-message {{ category }}">
-				{{ message }}
-			</div>
-			{% endfor %}
-		</div>
-		{% endif %}
-		{% endwith %}
-	
-		<header>
-			<h1>Welcome to EmotiNest, {{ user_name }}!</h1>
-		</header>
-	
-		<!-- Informații generale -->
-		<div class="card">
-			<h2>Your Stats</h2>
-			<p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
-			<p>Average Stress Level: <strong>{{ avg_stress }}</strong></p>
-			<p>Average Sleep Quality: <strong>{{ avg_sleep }}</strong></p>
-			<p>Average Energy Level: <strong>{{ avg_energy }}</strong></p>
-			<p>Average Productivity Level: <strong>{{ avg_productivity }}</strong></p>
-			<p>Average Water Intake: <strong>{{ avg_water_intake }} L</strong></p>
-			<p>Total Days with Physical Exercise: <strong>{{ total_exercise_days }}</strong></p>
-			<p>Total Days with Meditation: <strong>{{ total_meditation_days }}</strong></p>
-		</div>		
-		
-	
-		<!-- Goals Container -->
-		<section class="goals-container">
-			<div class="goals-card">
-				<h2>Your Goals</h2>
-				<ul class="goals-list">
-					{% for goal in goals %}
-					<li class="goal-item">
-						<span class="goal-text">{{ goal.description }}</span>
-						<form method="POST" action="{{ url_for('home.delete_goal', goal_id=goal.id) }}" class="goal-form">
-							<button type="submit" class="btn btn-success">Done</button>
-						</form>
-					</li>
-					{% endfor %}
-				</ul>
-			</div>
-			
-	
-			<div class="add-goal-card">
-				<h3>Add a New Goal</h3>
-				<form method="POST" action="/add_goal">
-					<input type="text" name="goal" placeholder="Enter your goal" required>
-					<button type="submit">Add Goal</button>
-				</form>
-			</div>
-		</section>
-	</main>
-	
+    <main>
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <header>
+            <h1>Welcome to EmotiNest, {{ user_name }}!</h1>
+        </header>
+
+        <!-- Informații generale -->
+        <div class="card">
+            <h2>Your Stats</h2>
+            <p>You have completed <strong>{{ total_entries }}</strong> daily entries so far.</p>
+            <p>Average Stress Level: <strong>{{ avg_stress | round(2) }}</strong></p>
+            <p>Average Sleep Quality: <strong>{{ avg_sleep | round(2) }}</strong></p>
+        </div>
+
+        <!-- Goals (Două casete, aliniate una lângă cealaltă) -->
+        <section class="goals-container">
+            <div class="goals-card">
+                <h2>Your Goals</h2>
+                <ul>
+                    {% for goal in goals %}
+                    <li>{{ goal }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="add-goal-card">
+                <h3>Add a New Goal</h3>
+                <form method="POST" action="/add_goal">
+                    <input type="text" name="goal" placeholder="Enter your goal" required>
+                    <button type="submit">Add Goal</button>
+                </form>
+            </div>
+        </section>
+
+    
+
+    </main>
 </body>
 </html>

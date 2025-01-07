@@ -3,7 +3,7 @@ body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #dcecf5; /* Fundal similar cu cel din logo */
+    background-color: #f1f5f8; /* Fundal deschis, calmant */
     color: #333;
     animation: fadeIn 1s ease-out;
 }
@@ -90,8 +90,71 @@ nav {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Goals Container */
-/* Container pentru secțiunile de goals */
+/* Butoane */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #45a049; /* Verde mai închis */
+    transform: scale(1.05); /* Crește ușor la hover */
+}
+
+/* Formulare și Input-uri */
+form {
+    margin-top: 20px;
+}
+
+input {
+    padding: 12px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--secondary-color); /* Border la focus */
+}
+
+/* Footer și butoane în footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f4f4f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+footer button {
+    width: 150px;
+    margin: 20px;
+}
+
+/* Elemente de efect și animații */
+footer {
+    animation: slideInFooter 0.6s ease-out;
+}
+
+@keyframes slideInFooter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Container pentru cele două casete */
 .goals-container {
     display: flex;
     justify-content: space-between; /* Spațiere între ele */
@@ -138,14 +201,23 @@ nav {
     }
 }
 
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h3 {
+    color: #333;
+}
+
+.tests-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
 }
 
 .btn-danger:hover {
@@ -170,31 +242,13 @@ nav {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ușoară umbră */
 }
 
-.goal-text {
-    flex: 1; /* Ocupă spațiul disponibil */
-    margin-right: 15px; /* Spațiu între text și buton */
-    word-wrap: break-word; /* Textul se rupe pe mai multe rânduri dacă e prea lung */
-    font-size: 16px;
+.tests-container a {
+    text-decoration: none;
+    color: #007bff;
 }
 
-.goal-form {
-    margin: 0;
-    display: inline;
+.tests-container a:hover {
+    text-decoration: underline;
 }
 
-/* Buton "Done" */
-.btn-success {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-success:hover {
-    background-color: #45a049;
-    transform: scale(1.05); /* Crește ușor la hover */
-}
 
