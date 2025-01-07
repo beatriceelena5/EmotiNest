@@ -4,67 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Form</title>
+    <title>Daily Form - EmotiNest</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-    <div class="login-container">
-        <form method="POST" class="login-form">
-            <h1>Daily Form</h1>
-            <div class="form-group">
-                <label for="emotional_state" class="form-label">Emotional State:</label>
-                <input type="text" name="emotional_state" id="emotional_state" placeholder="Happy, Sad, etc." required>
+    <!-- Bara de navigare -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo" class="logo">
             </div>
-            
-            <div class="form-group">
-                <label for="stress_level" class="form-label">Stress Level (1-10):</label>
-                <input type="number" name="stress_level" id="stress_level" min="1" max="10" required>
-            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/forms">Track Your Day</a></li>
+                <li><a href="/statistics">View Your Statistics</a></li>
+                <li><a href="/do_tests">Do Tests</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <div class="form-group">
-                <label for="sleep_quality" class="form-label">Sleep Quality (1-10):</label>
-                <input type="number" name="sleep_quality" id="sleep_quality" min="1" max="10" required>
+    <!-- Flash messages -->
+    <div class="flash-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div>
+            {% for category, message in messages %}
+            <div class="flash-message {{ category }}">
+                {{ message }}
             </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+    </div>
 
-            <div class="form-group">
-                <label for="energy_level" class="form-label">Energy Level (1-10):</label>
-                <input type="number" name="energy_level" id="energy_level" min="1" max="10" required>
-            </div>
+    <!-- Conținutul principal -->
+    <main class="container">
+        <div class="form-container">
+            <form method="POST" class="daily-form">
+                <h1>Daily Form</h1>
 
-            <div class="form-group">
-                <label for="productivity_level" class="form-label">Productivity Level (1-10):</label>
-                <input type="number" name="productivity_level" id="productivity_level" min="1" max="10" required>
-            </div>
+                <input type="text" name="emotional_state" placeholder="Emotional State (e.g., Happy, Sad)" required>
+                <input type="number" name="stress_level" placeholder="Stress Level (1-10)" min="1" max="10" required>
+                <input type="number" name="sleep_quality" placeholder="Sleep Quality (1-10)" min="1" max="10" required>
+                <input type="number" name="energy_level" placeholder="Energy Level (1-10)" min="1" max="10" required>
+                <input type="number" name="productivity_level" placeholder="Productivity Level (1-10)" min="1" max="10" required>
+                <input type="number" name="water_intake" placeholder="Water Intake (Liters)" step="0.1" required>
 
-            <div class="form-group">
-                <label for="water_intake" class="form-label">Water Intake (Liters):</label>
-                <input type="number" name="water_intake" id="water_intake" step="0.1" required>
-            </div>
-
-            <div class="form-group">
+                <!-- Exerciții fizice -->
                 <label class="form-label">Did you exercise today?</label>
                 <div class="form-check-group">
-                    <input type="radio" name="physical_exercise" id="exercise_yes" value="true" required>
-                    <label for="exercise_yes">Yes</label>
-                    <input type="radio" name="physical_exercise" id="exercise_no" value="false" required>
-                    <label for="exercise_no">No</label>
+                    <label class="form-check-label">
+                        <input type="radio" name="physical_exercise" value="true" required>
+                        <span class="checkmark">Yes</span>
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" name="physical_exercise" value="false" required>
+                        <span class="checkmark">No</span>
+                    </label>
                 </div>
-            </div>
 
-            <div class="form-group">
+                <!-- Meditație -->
                 <label class="form-label">Did you meditate today?</label>
                 <div class="form-check-group">
-                    <input type="radio" name="meditation" id="meditation_yes" value="true" required>
-                    <label for="meditation_yes">Yes</label>
-                    <input type="radio" name="meditation" id="meditation_no" value="false" required>
-                    <label for="meditation_no">No</label>
+                    <label class="form-check-label">
+                        <input type="radio" name="meditation" value="true" required>
+                        <span class="checkmark">Yes</span>
+                    </label>
+                    <label class="form-check-label">
+                        <input type="radio" name="meditation" value="false" required>
+                        <span class="checkmark">No</span>
+                    </label>
                 </div>
-            </div>
 
-            <button type="submit" class="btn">Submit</button>
-        </form>
-    </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </main>
 </body>
 
 </html>
