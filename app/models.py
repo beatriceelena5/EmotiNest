@@ -26,6 +26,7 @@ class DailyEntry(db.Model):
 	stress_level = db.Column(db.Integer, nullable=False)
 	sleep_quality = db.Column(db.Integer, nullable=False)
 	energy_level = db.Column(db.Integer, nullable=False)  # Nivel de energie
+	happiness_level = db.Column(db.Float, nullable=False)
 	productivity_level = db.Column(db.Integer, nullable=False)  # Nivel de productivitate
 	water_intake = db.Column(db.Float, nullable=False)  # Consum de apă în litri
 	physical_exercise = db.Column(db.Boolean, nullable=False)  # Exerciții fizice (Da/Nu)
