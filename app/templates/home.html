@@ -78,11 +78,14 @@
 
 			<div class="add-goal-card">
 				<h3>Add a New Goal</h3>
-				<form method="POST" action="/add_goal">
-					<input type="text" name="goal" placeholder="Enter your goal" required>
-					<button type="submit">Add Goal</button>
+				<form method="POST" action="/add_goal" class="goal-form-styled">
+					<div class="input-group">
+						<input type="text" name="goal" placeholder="Enter your goal..." class="input-field" required>
+						<button type="submit" class="btn btn-primary">Add Goal</button>
+					</div>
 				</form>
 			</div>
+			
 		</section>
 	</main>
 

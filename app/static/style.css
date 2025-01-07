@@ -306,4 +306,171 @@ nav {
     background-color: #2196F3; /* Albastru */
 }
 
+/*alt */
 
+/* Container general pentru grafice */
+.statistics-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 coloane egale */
+    gap: 20px; /* Spațiu între grafice */
+    margin-top: 20px;
+}
+
+/* Card pentru fiecare grafic */
+.chart-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Responsivitate */
+@media (max-width: 768px) {
+    .statistics-container {
+        grid-template-columns: 1fr; /* O singură coloană pe ecrane mici */
+    }
+}
+
+
+/*ADHD*/
+/* Fereastra pop-up */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fundal semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup.hidden {
+    display: none; /* Ascunde fereastra */
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.popup h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.popup p {
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.text-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #007BFF; /* Primary button color */
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.goals-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.goals-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.goals-card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px); /* Slight lift on hover */
+}
+
+/* Styling for the Add a New Goal card */
+.add-goal-card h3 {
+    font-size: 1.5rem;
+    color: #2e5475; /* Align with theme */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.goal-form-styled {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group {
+    display: flex;
+    width: 100%;
+    max-width: 400px; /* Restrict input field width */
+}
+
+.input-field {
+    flex: 1;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #7bb8c4; /* Theme border */
+    border-radius: 8px 0 0 8px; /* Rounded corners for the left side */
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+    border-color: #4CAF50; /* Highlight border on focus */
+}
+
+.btn-primary {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50; /* Align button color with the theme */
+    border: none;
+    border-radius: 0 8px 8px 0; /* Rounded corners for the right side */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #45a049; /* Slightly darker shade on hover */
+    transform: scale(1.05); /* Hover animation */
+}
