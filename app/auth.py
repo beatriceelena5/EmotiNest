@@ -26,11 +26,12 @@ def login():
 @auth.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
+        name = request.form.get('name')  # Preia numele utilizatorului
         email = request.form.get('email')
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
 
-        # Validation
+        # Validări
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email is already in use.', category='error')
@@ -38,15 +39,18 @@ def signup():
             flash('Passwords do not match.', category='error')
         elif len(password) < 6:
             flash('Password must be at least 6 characters long.', category='error')
+        elif len(name) < 2:
+            flash('Name must be at least 2 characters long.', category='error')
         else:
-            # Create a new user
-            new_user = User(email=email, password=generate_password_hash(password, method='pbkdf2:sha256'))
+            # Creează un utilizator nou
+            new_user = User(email=email, name=name, password=generate_password_hash(password, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully!', category='success')
             return redirect(url_for('auth.login'))
 
     return render_template('signup.html')
+
 
 # Logout route
 @auth.route('/logout')
