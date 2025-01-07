@@ -1,37 +1,109 @@
-<h2>Depression Test (PHQ-9)</h2>
-<form method="POST" action="/submit_depressiontest">
-    <label for="question1">1. How often have you had little interest or pleasure in doing things?</label><br>
-    <input type="radio" name="question1" value="0"> Never<br>
-    <input type="radio" name="question1" value="1"> Several days<br>
-    <input type="radio" name="question1" value="2"> More than half the days<br>
-    <input type="radio" name="question1" value="3"> Nearly every day<br><br>
+<!DOCTYPE html>
+<html lang="en">
 
-    <label for="question2">2. How often have you felt tired or had little energy?</label><br>
-    <input type="radio" name="question2" value="0"> Never<br>
-    <input type="radio" name="question2" value="1"> Several days<br>
-    <input type="radio" name="question2" value="2"> More than half the days<br>
-    <input type="radio" name="question2" value="3"> Nearly every day<br><br>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depression Test - EmotiNest</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 
-    <label for="question3">3. How often have you had trouble sleeping or sleeping too much?</label><br>
-    <input type="radio" name="question3" value="0"> Never<br>
-    <input type="radio" name="question3" value="1"> Several days<br>
-    <input type="radio" name="question3" value="2"> More than half the days<br>
-    <input type="radio" name="question3" value="3"> Nearly every day<br><br>
+<body>
+    <!-- Bara de navigare -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/forms">Track Your Day</a></li>
+                <li><a href="/statistics">View Your Statistics</a></li>
+                <li><a href="/do_tests">Do Tests</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <label for="question4">4. How often have you felt down, depressed, or hopeless?</label><br>
-    <input type="radio" name="question4" value="0"> Never<br>
-    <input type="radio" name="question4" value="1"> Several days<br>
-    <input type="radio" name="question4" value="2"> More than half the days<br>
-    <input type="radio" name="question4" value="3"> Nearly every day<br><br>
+    <main class="container">
+        <h1>Depression Test (PHQ-9)</h1>
+        <form onsubmit="handleTestSubmit(event, 'Depression')">
+            <label for="question1">1. How often have you had little interest or pleasure in doing things?</label><br>
+            <input type="radio" name="question1" value="0" required> Never<br>
+            <input type="radio" name="question1" value="1"> Several days<br>
+            <input type="radio" name="question1" value="2"> More than half the days<br>
+            <input type="radio" name="question1" value="3"> Nearly every day<br><br>
 
-    <label for="question5">5. How often have you had thoughts that you would be better off dead, or of hurting yourself?</label><br>
-    <input type="radio" name="question5" value="0"> Never<br>
-    <input type="radio" name="question5" value="1"> Several days<br>
-    <input type="radio" name="question5" value="2"> More than half the days<br>
-    <input type="radio" name="question5" value="3"> Nearly every day<br><br>
+            <label for="question2">2. How often have you felt tired or had little energy?</label><br>
+            <input type="radio" name="question2" value="0" required> Never<br>
+            <input type="radio" name="question2" value="1"> Several days<br>
+            <input type="radio" name="question2" value="2"> More than half the days<br>
+            <input type="radio" name="question2" value="3"> Nearly every day<br><br>
 
-    <button type="submit">Submit</button>
-</form>
+            <label for="question3">3. How often have you had trouble sleeping or sleeping too much?</label><br>
+            <input type="radio" name="question3" value="0" required> Never<br>
+            <input type="radio" name="question3" value="1"> Several days<br>
+            <input type="radio" name="question3" value="2"> More than half the days<br>
+            <input type="radio" name="question3" value="3"> Nearly every day<br><br>
 
-<h3>Feedback:</h3>
-<p>If you answered "several days" or "more than half the days" to many of the questions, it could indicate depression. We recommend consulting a mental health professional.</p>
+            <label for="question4">4. How often have you felt down, depressed, or hopeless?</label><br>
+            <input type="radio" name="question4" value="0" required> Never<br>
+            <input type="radio" name="question4" value="1"> Several days<br>
+            <input type="radio" name="question4" value="2"> More than half the days<br>
+            <input type="radio" name="question4" value="3"> Nearly every day<br><br>
+
+            <label for="question5">5. How often have you had thoughts that you would be better off dead, or of hurting yourself?</label><br>
+            <input type="radio" name="question5" value="0" required> Never<br>
+            <input type="radio" name="question5" value="1"> Several days<br>
+            <input type="radio" name="question5" value="2"> More than half the days<br>
+            <input type="radio" name="question5" value="3"> Nearly every day<br><br>
+
+            <button type="submit" class="btn">Submit</button>
+        </form>
+    </main>
+
+    <!-- Fereastra pop-up -->
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closePopup()">&times;</span>
+            <h2 id="popup-title"></h2>
+            <p id="popup-score"></p>
+            <p id="popup-feedback"></p>
+        </div>
+    </div>
+
+    <script>
+        const feedbackMessages = {
+            Depression: (score) =>
+                score > 10
+                    ? "Your score indicates possible depression symptoms. Please consult a mental health professional."
+                    : "Your mood levels are within the normal range.",
+        };
+
+        function handleTestSubmit(event, testType) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            let score = 0;
+
+            // Calculate the score
+            formData.forEach((value) => {
+                score += parseInt(value, 10);
+            });
+
+            // Set feedback messages
+            const feedback = feedbackMessages[testType](score);
+
+            // Display the pop-up
+            document.getElementById("popup-title").textContent = `${testType} Test Result`;
+            document.getElementById("popup-score").textContent = `Your score: ${score}`;
+            document.getElementById("popup-feedback").textContent = feedback;
+            document.getElementById("popup").classList.remove("hidden");
+        }
+
+        function closePopup() {
+            document.getElementById("popup").classList.add("hidden");
+        }
+    </script>
+</body>
+
+</html>

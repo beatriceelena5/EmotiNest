@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Do Tests</title>
+    <title>Do Tests - EmotiNest</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <h1>Do Tests</h1>
-    <p>Select a test to get started:</p>
-    <ul>
-        <li><a href="/do_tests/adhd">ADHD Test</a></li>
-        <li><a href="/do_tests/depression">Depression Test</a></li>
-        <li><a href="/do_tests/anxiety">Anxiety Test</a></li>
-        <li><a href="/do_tests/burnout">Job Burnout Test</a></li>
-    </ul>
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo_clear.png') }}" alt="EmotiNest Logo" class="logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/forms">Track Your Day</a></li>
+                <li><a href="/statistics">View Your Statistics</a></li>
+                <li><a href="/do_tests">Do Tests</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="text-center">Do Tests</h1>
+        <p class="text-center">Select a test to get started:</p>
+
+        <!-- Test List -->
+        <div class="goals-container">
+            <div class="goals-card">
+                <h2>ADHD Test</h2>
+                <p>Evaluate symptoms of attention deficit and hyperactivity.</p>
+                <a href="/do_tests/adhd" class="btn btn-primary">Start ADHD Test</a>
+            </div>
+            <div class="goals-card">
+                <h2>Depression Test</h2>
+                <p>Assess your mood and signs of depression.</p>
+                <a href="/do_tests/depression" class="btn btn-primary">Start Depression Test</a>
+            </div>
+            <div class="goals-card">
+                <h2>Anxiety Test</h2>
+                <p>Measure anxiety levels based on common symptoms.</p>
+                <a href="/do_tests/anxiety" class="btn btn-primary">Start Anxiety Test</a>
+            </div>
+            <div class="goals-card">
+                <h2>Job Burnout Test</h2>
+                <p>Check for signs of workplace burnout and stress.</p>
+                <a href="/do_tests/burnout" class="btn btn-primary">Start Burnout Test</a>
+            </div>
+        </div>
+    </main>
+
 </body>
+
 </html>
