@@ -1,69 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center mb-4">Daily Form</h1>
-        <form method="POST" class="needs-validation" novalidate>
-            <div class="mb-3">
+    <div class="login-container">
+        <form method="POST" class="login-form">
+            <h1>Daily Form</h1>
+            <div class="form-group">
                 <label for="emotional_state" class="form-label">Emotional State:</label>
-                <input type="text" name="emotional_state" id="emotional_state" class="form-control" placeholder="Happy, Sad, etc." required>
+                <input type="text" name="emotional_state" id="emotional_state" placeholder="Happy, Sad, etc." required>
             </div>
-
-            <div class="mb-3">
+            
+            <div class="form-group">
                 <label for="stress_level" class="form-label">Stress Level (1-10):</label>
-                <input type="number" name="stress_level" id="stress_level" class="form-control" min="1" max="10" required>
+                <input type="number" name="stress_level" id="stress_level" min="1" max="10" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="sleep_quality" class="form-label">Sleep Quality (1-10):</label>
-                <input type="number" name="sleep_quality" id="sleep_quality" class="form-control" min="1" max="10" required>
+                <input type="number" name="sleep_quality" id="sleep_quality" min="1" max="10" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="energy_level" class="form-label">Energy Level (1-10):</label>
-                <input type="number" name="energy_level" id="energy_level" class="form-control" min="1" max="10" required>
+                <input type="number" name="energy_level" id="energy_level" min="1" max="10" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="productivity_level" class="form-label">Productivity Level (1-10):</label>
-                <input type="number" name="productivity_level" id="productivity_level" class="form-control" min="1" max="10" required>
+                <input type="number" name="productivity_level" id="productivity_level" min="1" max="10" required>
             </div>
 
-            <div class="mb-3">
+            <div class="form-group">
                 <label for="water_intake" class="form-label">Water Intake (Liters):</label>
-                <input type="number" name="water_intake" id="water_intake" class="form-control" step="0.1" required>
+                <input type="number" name="water_intake" id="water_intake" step="0.1" required>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label">Did you exercise today?</label><br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" name="physical_exercise" id="exercise_yes" value="true" class="form-check-input" required>
-                    <label for="exercise_yes" class="form-check-label">Yes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input type="radio" name="physical_exercise" id="exercise_no" value="false" class="form-check-input" required>
-                    <label for="exercise_no" class="form-check-label">No</label>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label">Did you meditate today?</label><br>
-                <div class="form-check form-check-inline">
-                    <input type="radio" name="meditation" id="meditation_yes" value="true" class="form-check-input" required>
-                    <label for="meditation_yes" class="form-check-label">Yes</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input type="radio" name="meditation" id="meditation_no" value="false" class="form-check-input" required>
-                    <label for="meditation_no" class="form-check-label">No</label>
+            <div class="form-group">
+                <label class="form-label">Did you exercise today?</label>
+                <div class="form-check-group">
+                    <input type="radio" name="physical_exercise" id="exercise_yes" value="true" required>
+                    <label for="exercise_yes">Yes</label>
+                    <input type="radio" name="physical_exercise" id="exercise_no" value="false" required>
+                    <label for="exercise_no">No</label>
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">Submit</button>
+            <div class="form-group">
+                <label class="form-label">Did you meditate today?</label>
+                <div class="form-check-group">
+                    <input type="radio" name="meditation" id="meditation_yes" value="true" required>
+                    <label for="meditation_yes">Yes</label>
+                    <input type="radio" name="meditation" id="meditation_no" value="false" required>
+                    <label for="meditation_no">No</label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn">Submit</button>
         </form>
     </div>
 </body>
+
 </html>
