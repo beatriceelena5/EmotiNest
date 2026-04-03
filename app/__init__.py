@@ -1,40 +1,30 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 
+# Păstrăm doar baza de date
 db = SQLAlchemy()
-login_manager = LoginManager()
-
-@login_manager.user_loader
-def load_user(user_id):
-	from .models import User
-	return User.query.get(int(user_id))
 
 def create_app():
-	app = Flask(__name__)
-	app.config['SECRET_KEY'] = 'your_secret_key_here'
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Emotinest.db'
+    app = Flask(__name__)
+    
+    # Cheia secretă e bună de păstrat pentru sesiuni/flash messages
+    app.config['SECRET_KEY'] = 'ppc_energy_secret_key'
+    
+    # Putem schimba numele bazei de date în ceva relevant pentru tematică
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///energy_data.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-	db.init_app(app)
-	login_manager.init_app(app)
+    db.init_app(app)
 
-	login_manager.login_view = 'auth.login'
-	login_manager.login_message = "Please log in to access this page."
-	login_manager.login_message_category = "info"
+    # Importăm și înregistrăm doar blueprint-urile de care avem nevoie
+    from .home import home as home_blueprint
+    from .statistics import statistics as statistics_blueprint
 
-	from .auth import auth as auth_blueprint
-	app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    app.register_blueprint(home_blueprint)
+    app.register_blueprint(statistics_blueprint)
 
-	from .home import home as home_blueprint
-	app.register_blueprint(home_blueprint)
+    # Creăm tabelele automat dacă nu există (util pentru prima rulare în Docker)
+    with app.app_context():
+        db.create_all()
 
-	from .forms import forms as forms_blueprint
-	app.register_blueprint(forms_blueprint)
-
-	from .statistics import statistics as statistics_blueprint
-	app.register_blueprint(statistics_blueprint)
-
-	from .do_tests import do_tests as do_tests_blueprint
-	app.register_blueprint(do_tests_blueprint, url_prefix='/do_tests')
-
-	return app
+    return app
